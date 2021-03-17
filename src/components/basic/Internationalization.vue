@@ -8,7 +8,7 @@
     <v-list dense nav>
       <v-list-item v-for="(language, index) in languages" :key="index" @click="switchLanguage(language)">
         <v-list-item-action-text>
-          {{ language === 'zh' ? $t('Common.Chinese') : $t('Common.English') }}
+          {{ language === 'zh' ? $t('System.Chinese') : $t('System.English') }}
         </v-list-item-action-text>
       </v-list-item>
     </v-list>

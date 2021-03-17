@@ -15,9 +15,19 @@ const routes = [
         path: '/dashboard',
         name: 'Dashboard',
         meta: {
-          title: 'Dashboard'
+          name: 'Dashboard',
+          title: 'SystemOverview'
         },
         component: () => import('../views/app/dashboard/Index.vue')
+      },
+      {
+        path: '/article',
+        name: 'Article',
+        meta: {
+          name: 'Article',
+          title: 'ArticleManagement'
+        },
+        component: () => import('../views/app/article/Index.vue')
       }
     ]
   },
@@ -31,6 +41,7 @@ const routes = [
         path: 'signin',
         name: 'SignIn',
         meta: {
+          name: 'SignIn',
           title: 'SignIn'
         },
         component: () => import('../views/auth/core/SignIn.vue')

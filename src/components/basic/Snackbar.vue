@@ -8,7 +8,7 @@
     <div class="v-alert__border v-alert__border--left"/>
     <v-icon v-show="icon" small class="mr-4" v-text="icon"/>
     <span class="vertical-align-middle text-caption" v-text="message"/>
-    <v-btn class="text-none ml-2 text-caption" small text @click="show = false" v-text="$t('Common.Close')"/>
+    <v-btn class="text-none ml-2 text-caption" small text @click="show = false" v-text="$t('System.Close')"/>
   </v-snackbar>
 </template>
 

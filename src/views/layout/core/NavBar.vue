@@ -12,7 +12,7 @@
         class="text-caption"
         background-color="secondary"
         prepend-inner-icon="mdi-magnify"
-        :placeholder="$t('Common.Search')"/>
+        :placeholder="$t('System.Search')"/>
     </v-responsive>
     <internationalization/>
     <v-btn icon class="hidden-sm-and-down" target="_blank" :href="github">

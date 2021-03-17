@@ -30,7 +30,7 @@ export default {
         if (i !== 0) {
           this.items.push(
             {
-              text: this.$t(`Menu.${breadcrumbs[i].meta.title}`),
+              text: this.$t(`Menu.${breadcrumbs[i].meta.name}`),
               disabled: i === breadcrumbs.length - 1,
               href: breadcrumbs[i].path
             }

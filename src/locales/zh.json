@@ -4,20 +4,20 @@
   },
   "Menu": {
     "SignIn": "登录",
-    "Dashboard": "首页"
+    "Dashboard": "首页",
+    "Article": "文章"
   },
-  "Common": {
+  "Title": {
+    "SignIn": "登录",
+    "SystemOverview": "系统总览",
+    "ArticleManagement": "文章管理"
+  },
+  "System": {
+    "ConnectTimeout": "连接超时",
     "Chinese": "简体中文",
     "English": "English",
     "Close": "关闭",
     "Search": "搜索"
-  },
-  "Tip": {
-    "ConnectTimeout": "连接超时",
-    "Welcome": "页面已加载完毕，欢迎来到 Siamese！",
-    "SwipingRightSide": "请按住滑块拖动",
-    "VerifySuccess": "通过验证",
-    "SingInSuccess": "登录成功"
   },
   "Page": {
     "SignIn": {
@@ -34,6 +34,17 @@
       "PrivacyPolicy": "隐私政策",
       "UsernameRequiredTip": "用户名为必填项",
       "PasswordRequiredTip": "密码为必填项"
+    },
+    "Dashboard": {
+
+    },
+    "Article": {
+      "Search": "搜索",
+      "Add": "添加",
+      "Edit": "编辑",
+      "Delete": "删除",
+      "NoData": "暂无数据",
+      "LoadingItems": "数据加载中"
     }
   }
 }

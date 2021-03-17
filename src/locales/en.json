@@ -4,20 +4,20 @@
   },
   "Menu": {
     "SignIn": "Sign In",
-    "Dashboard": "Dashboard"
+    "Dashboard": "Dashboard",
+    "Article": "Article"
   },
-  "Common": {
+  "Title": {
+    "SignIn": "Sign In",
+    "SystemOverview": "System Overview",
+    "ArticleManagement": "Article Management"
+  },
+  "System": {
+    "ConnectTimeout": "Connect timeout",
     "Chinese": "简体中文",
     "English": "English",
     "Close": "Close",
     "Search": "Search"
-  },
-  "Tip": {
-    "ConnectTimeout": "Connect timeout",
-    "Welcome": "Page loaded, welcome to siamese!",
-    "SwipingRightSide": "Swiping to the right side",
-    "VerifySuccess": "Verify success",
-    "SingInSuccess": "Sing in success"
   },
   "Page": {
     "SignIn": {
@@ -34,6 +34,17 @@
       "PrivacyPolicy": "Privacy Policy",
       "UsernameRequiredTip": "Username is required",
       "PasswordRequiredTip": "Password is required"
+    },
+    "Dashboard": {
+
+    },
+    "Article": {
+      "Search": "Search",
+      "Add": "Add",
+      "Edit": "Edit",
+      "Delete": "Delete",
+      "NoData": "No Data",
+      "LoadingItems": "Loading Items"
     }
   }
 }

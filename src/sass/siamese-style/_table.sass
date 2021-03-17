@@ -1,0 +1,21 @@
+.basic-ripple
+  width: 24px
+  height: 24px
+  left: -10px
+  top: calc(50% - 19px)
+  opacity: 0
+
+.basic-light-background
+  background: #f9f9f9
+
+.basic-dark-background
+  background: #212121
+
+.v-data-table-header-mobile__wrapper .v-input--selection-controls__ripple, .v-data-table-header .v-input--selection-controls__ripple, tr td .v-input--selection-controls__ripple
+  @extend .basic-ripple
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper)
+  @extend .basic-light-background
+
+.v-data-table tbody tr.v-data-table__selected
+  @extend .basic-light-background

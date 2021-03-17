@@ -52,7 +52,8 @@ export default {
   data: () => ({
     miniVariant: false,
     items: [
-      { text: 'Menu.Dashboard', icon: 'mdi-palette', path: '/dashboard' }
+      { text: 'Menu.Dashboard', icon: 'mdi-palette', path: '/dashboard' },
+      { text: 'Menu.Article', icon: 'mdi-gentoo', path: '/article' }
     ]
   }),
   computed: {

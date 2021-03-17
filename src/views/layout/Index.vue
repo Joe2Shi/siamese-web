@@ -5,8 +5,13 @@
     <v-main>
       <loading :loading="loading"/>
       <v-card flat class="ma-4" color="accent">
-        <breadcrumb/>
-        <router-view/>
+        <breadcrumb class="mb-2"/>
+        <v-card flat>
+          <basic-tick/>
+          <v-card-title>{{title}}</v-card-title>
+          <v-divider class="pt-4"/>
+          <router-view/>
+        </v-card>
       </v-card>
     </v-main>
     <directory/>
@@ -15,6 +20,7 @@
 
 <script>
 import Loading from '../../components/basic/Loading'
+import BasicTick from '../../components/basic/BasicTick'
 import Breadcrumb from './core/Breadcrumb'
 import NavBar from './core/NavBar'
 import SideBar from './core/SideBar'
@@ -24,9 +30,11 @@ import { getListAPI } from '../../api'
 
 export default {
   name: 'Layout',
+  props: ['title'],
   components: {
     Directory,
     Loading,
+    BasicTick,
     NavBar,
     SideBar,
     Breadcrumb
@@ -43,12 +51,14 @@ export default {
     this.getUserInformation()
   },
   methods: {
-    ...mapActions(['switchDrawer']),
+    ...mapActions(['switchDrawer', 'showSnackbar']),
     getUserInformation: function () {
       getListAPI('/siamese-user-interface/user')
         .then(response => {
-          if (response) {
+          if (response && response.data.code === 20000) {
             this.user = response.data.data
+          } else {
+            this.showSnackbar({ message: response.data.message, color: 'error' })
           }
         })
     }

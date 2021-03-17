@@ -21,11 +21,14 @@ service.interceptors.response.use(response => {
   return response
 }, error => {
   store.state.loading = false
+  if (error.response && error.response.status === 401) {
+    vue.$router.push({ path: 'signin' })
+  }
   if (error.code === undefined) {
     vue.$store.dispatch('showSnackbar', { message: error.message, color: 'error' })
   }
   if (error.code === 'ECONNABORTED') {
-    vue.$store.dispatch('showSnackbar', { message: vue.$t('Tip.ConnectTimeout'), color: 'error' })
+    vue.$store.dispatch('showSnackbar', { message: vue.$t('System.ConnectTimeout'), color: 'error' })
   }
 })
 

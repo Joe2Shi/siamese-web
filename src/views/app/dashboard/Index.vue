@@ -1,25 +1,16 @@
 <template>
-  <v-card flat class="dashboard" color="accent">
-    <v-row>
-      <v-col cols="12">
-        <v-card flat>
-          <basic-tick/>
-          <v-card-title>Siamese Overview</v-card-title>
-          <v-divider class="py-4"/>
-          <div v-if="chart">
-            <apexchart type="line" :options="lineOptions" :series="lineSeries" height="320"/>
-          </div>
-        </v-card>
-      </v-col>
-    </v-row>
+  <v-card flat tile class="dashboard">
+    <div v-if="chart">
+      <apexchart type="line" :options="lineOptions" :series="lineSeries" height="320"/>
+    </div>
   </v-card>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import BasicTick from '../../../components/basic/BasicTick'
 
 export default {
+  name: 'Dashboard',
   data: () => ({
     chart: false,
     lineOptions: {},
@@ -139,7 +130,6 @@ export default {
     ],
     verify: false
   }),
-  components: { BasicTick },
   mounted () {
     this.chart = true
     this.switchChartsTheme()

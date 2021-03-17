@@ -1,7 +1,7 @@
 <template>
   <v-app id="app" class="grey">
     <snackbar/>
-    <router-view/>
+    <router-view :title="title"/>
   </v-app>
 </template>
 
@@ -12,6 +12,9 @@ import { mapState } from 'vuex'
 export default {
   name: 'SingInLayout',
   components: { Snackbar },
+  data: () => ({
+    title: null
+  }),
   created () {
     this.init()
   },
@@ -37,7 +40,8 @@ export default {
     switchTitle: function (matched) {
       const size = matched.length
       if (size > 0) {
-        document.title = `${this.$t('Base.ApplicationName')} / ${this.$t(`Menu.${matched[size - 1].meta.title}`)}`
+        document.title = `${this.$t('Base.ApplicationName')} / ${this.$t(`Menu.${matched[size - 1].meta.name}`)}`
+        this.title = this.$t(`Title.${matched[size - 1].meta.title}`)
       }
     }
   },
