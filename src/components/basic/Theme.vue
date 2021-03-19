@@ -11,12 +11,12 @@ export default {
   name: 'Theme',
   methods: {
     ...mapActions(['switchTheme']),
-    changeTheme: function () {
+    changeTheme () {
       this.$vuetify.theme.dark = this.theme === 'light'
       this.switchTheme(this.theme === 'light' ? 'dark' : 'light')
       this.switchBackgroundColor()
     },
-    switchBackgroundColor: function () {
+    switchBackgroundColor () {
       if (this.$vuetify.theme.dark) document.body.style.backgroundColor = '#191919'
       else document.body.style.backgroundColor = '#f1f3f4'
     }

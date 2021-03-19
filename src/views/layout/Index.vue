@@ -52,10 +52,10 @@ export default {
   },
   methods: {
     ...mapActions(['switchDrawer', 'showSnackbar']),
-    getUserInformation: function () {
+    getUserInformation () {
       getListAPI('/siamese-user-interface/user')
         .then(response => {
-          if (response && response.data.code === 20000) {
+          if (response && response.data.code === 10000) {
             this.user = response.data.data
           } else {
             this.showSnackbar({ message: response.data.message, color: 'error' })

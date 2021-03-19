@@ -8,7 +8,16 @@ function toHump (name) {
   })
 }
 
+function getArrayParam (array, key) {
+  const params = []
+  array.forEach(item => {
+    params.push(item[key])
+  })
+  return params.join(',')
+}
+
 export default {
   toLine,
-  toHump
+  toHump,
+  getArrayParam
 }

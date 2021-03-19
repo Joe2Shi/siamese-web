@@ -135,7 +135,7 @@ export default {
     this.switchChartsTheme()
   },
   methods: {
-    switchChartsTheme: function () {
+    switchChartsTheme () {
       if (this.$vuetify.theme.dark) this.lineOptions = this.darkLineOptions
       else this.lineOptions = this.lightLineOptions
     },

@@ -5,7 +5,7 @@
         <v-icon left small>mdi-plus</v-icon>
         {{$t('Page.Article.Add')}}
       </v-btn>
-      <v-btn elevation="0" color="error" small class="text-caption text-none">
+      <v-btn elevation="0" color="error" @click="dialog = true" small :disabled="selected.length < 1" class="text-caption text-none">
         <v-icon left small>mdi-trash-can-outline</v-icon>
         {{$t('Page.Article.Delete')}}
       </v-btn>
@@ -54,19 +54,33 @@
         </template>
       </v-data-table>
     </v-card>
+    <!-- deleteDialog -->
+    <v-dialog v-model="dialog" max-width="300">
+      <v-card>
+        <v-card-text class="pt-3 pb-0">
+          <v-icon color="warning" class="dialog mr-4">mdi-alert-outline</v-icon>
+          Confirm delete it?
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer/>
+          <v-btn color="info" text @click="dialog = false" small class="text-none">Disagree</v-btn>
+          <v-btn color="primary" text @click="deleteItem()" small class="text-none">Agree</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-card>
 </template>
 
 <script>
 import Pagination from '../../../components/page/Pagination'
-import { getListAPI } from '../../../api'
+import { getListAPI, deleteListAPI } from '../../../api'
 import utils from '../../../utils'
 
 export default {
   name: 'Article',
   components: { Pagination },
   data: () => ({
-    msg: 0,
+    dialog: false,
     search: undefined,
     total: 0,
     items: [],
@@ -115,7 +129,7 @@ export default {
         { key: this.search, page: page, rows: itemsPerPage, sortBy: name, desc: sortDesc[0] })
         .then(response => {
           this.loading = false
-          if (response && response.data.code === 20000) {
+          if (response && response.data.code === 10000) {
             this.total = response.data.data.total
             this.items = response.data.data.items
           } else {
@@ -130,11 +144,12 @@ export default {
         })
     },
     deleteItem (id) {
-      console.log(id)
+      deleteListAPI('/siamese-item-interface/article', { ids: id || utils.getArrayParam(this.selected, 'id') })
+        .then(response => {
+          if (response && response.data.code === 20000) {}
+        })
     },
-    openUpdateDialog (item) {
-      console.log(item)
-    }
+    openUpdateDialog (item) {}
   }
 }
 </script>

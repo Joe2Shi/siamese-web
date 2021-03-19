@@ -18,6 +18,12 @@ service.interceptors.request.use(config => {
 
 service.interceptors.response.use(response => {
   store.state.loading = false
+  if (response.data.code === 20000) {
+    vue.$store.dispatch('showSnackbar', { message: response.data.message, color: 'success' })
+  }
+  if (response.data.code >= 40000) {
+    vue.$store.dispatch('showSnackbar', { message: response.data.message, color: 'error' })
+  }
   return response
 }, error => {
   store.state.loading = false

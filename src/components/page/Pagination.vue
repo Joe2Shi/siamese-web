@@ -39,7 +39,7 @@ export default {
     }
   },
   computed: {
-    totalPages () {
+    'totalPages' () {
       return this.total % this.itemsPerPage === 0 ? this.total / this.itemsPerPage : Math.floor(this.total / this.itemsPerPage) + 1
     }
   }

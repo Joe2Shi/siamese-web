@@ -1,23 +1,16 @@
 <template>
   <v-navigation-drawer color="accent" :mini-variant="miniVariant" v-model="drawer" floating clipped app>
     <v-list>
-      <v-list-item v-show="!miniVariant">
-        <v-list-item-avatar class="mx-auto" width="80" height="80">
+      <v-list-item :class="miniVariant ? `px-2` : ``">
+        <v-avatar :class="`mx-auto ${!miniVariant ? `my-2` : ``}`" :size="!miniVariant ? 80 : 32">
           <v-img class="grey" :src="avatar"/>
-        </v-list-item-avatar>
+        </v-avatar>
       </v-list-item>
       <v-list-item v-show="!miniVariant">
         <v-list-item-content class="py-0">
           <v-list-item-title class="text-center text-body-1 font-weight-medium" v-text="username"/>
           <v-list-item-subtitle class="text-center text-caption" v-text="motto"/>
         </v-list-item-content>
-      </v-list-item>
-      <v-list-item class="px-2" v-show="miniVariant">
-        <v-list-item-avatar>
-          <v-list-item-avatar class="mx-auto">
-            <v-img :src="avatar"/>
-          </v-list-item-avatar>
-        </v-list-item-avatar>
       </v-list-item>
     </v-list>
     <v-divider/>
