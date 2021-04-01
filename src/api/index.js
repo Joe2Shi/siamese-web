@@ -6,8 +6,8 @@ export function getListAPI (url, params) {
 }
 
 // post
-export function postAPI (url, params) {
-  return http.post(url, params)
+export function postAPI (url, params, headers) {
+  return http.post(url, params, headers)
 }
 
 // put

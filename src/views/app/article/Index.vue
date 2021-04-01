@@ -73,7 +73,7 @@
 
 <script>
 import Pagination from '../../../components/page/Pagination'
-import { getListAPI, deleteListAPI } from '../../../api'
+import { getListAPI, deleteListAPI, postAPI } from '../../../api'
 import utils from '../../../utils'
 
 export default {
@@ -103,7 +103,7 @@ export default {
       { text: 'URL', align: 'center', sortable: false, value: 'url' },
       { text: 'Created Time', align: 'center', value: 'createTime' },
       { text: 'Update Time', align: 'center', value: 'updateTime' },
-      { text: 'Operate', align: 'center', sortable: false, value: 'operate' }
+      { text: 'Operate', align: 'center', sortable: false, value: 'operate', width: 200 }
     ]
   }),
   watch: {
@@ -149,7 +149,18 @@ export default {
           if (response && response.data.code === 20000) {}
         })
     },
-    openUpdateDialog (item) {}
+    openUpdateDialog (item) {},
+    addArticle () {
+      const formData = new FormData()
+      formData.append('title', 'Java')
+      formData.append('subtitle', 'Java基础')
+      formData.append('title', 'Java')
+      formData.append('file', this.file)
+      postAPI('/siamese-item-interface/article', formData, { contentType: 'multipart/form-data' })
+        .then(response => {
+          console.log(response)
+        })
+    }
   }
 }
 </script>
