@@ -44,7 +44,10 @@
       "Edit": "Edit",
       "Delete": "Delete",
       "NoData": "No Data",
-      "LoadingItems": "Loading Items"
+      "LoadingItems": "Loading Items",
+      "Cancel": "Cancel",
+      "Confirm": "Confirm",
+      "ConfirmDeleteTip": "Are you sure you wish to remove?"
     }
   }
 }

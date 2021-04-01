@@ -44,7 +44,10 @@
       "Edit": "编辑",
       "Delete": "删除",
       "NoData": "暂无数据",
-      "LoadingItems": "数据加载中"
+      "LoadingItems": "数据加载中",
+      "Cancel": "取消",
+      "Confirm": "确认",
+      "ConfirmDeleteTip": "你确定要删除吗？"
     }
   }
 }

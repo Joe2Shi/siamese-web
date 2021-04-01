@@ -5,7 +5,7 @@
         <v-icon left small>mdi-plus</v-icon>
         {{$t('Page.Article.Add')}}
       </v-btn>
-      <v-btn elevation="0" color="error" @click="dialog = true" small :disabled="selected.length < 1" class="text-caption text-none">
+      <v-btn elevation="0" color="error" @click="openDeleteDialog()" small :disabled="selected.length < 1" class="text-caption text-none">
         <v-icon left small>mdi-trash-can-outline</v-icon>
         {{$t('Page.Article.Delete')}}
       </v-btn>
@@ -43,7 +43,7 @@
             <v-icon left small>mdi-square-edit-outline</v-icon>
             {{$t('Page.Article.Edit')}}
           </v-btn>
-          <v-btn elevation="0" @click="deleteItem(item.id)" text color="error" small class="text-caption text-none">
+          <v-btn elevation="0" @click="openDeleteDialog(item)" text color="error" small class="text-caption text-none">
             <v-icon left small>mdi-trash-can-outline</v-icon>
             {{$t('Page.Article.Delete')}}
           </v-btn>
@@ -54,17 +54,20 @@
         </template>
       </v-data-table>
     </v-card>
-    <!-- deleteDialog -->
-    <v-dialog v-model="dialog" max-width="300">
+    <v-dialog v-model="dialog" max-width="400">
       <v-card>
         <v-card-text class="pt-3 pb-0">
           <v-icon color="warning" class="dialog mr-4">mdi-alert-outline</v-icon>
-          Confirm delete it?
+          {{$t('Page.Article.ConfirmDeleteTip')}}
         </v-card-text>
         <v-card-actions>
           <v-spacer/>
-          <v-btn color="info" text @click="dialog = false" small class="text-none">Disagree</v-btn>
-          <v-btn color="primary" text @click="deleteItem()" small class="text-none">Agree</v-btn>
+          <v-btn color="info" text @click="cancelDelete()" small class="text-none">
+            {{$t('Page.Article.Cancel')}}
+          </v-btn>
+          <v-btn color="primary" text @click="deleteItem()" small class="text-none">
+            {{$t('Page.Article.Confirm')}}
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -73,7 +76,7 @@
 
 <script>
 import Pagination from '../../../components/page/Pagination'
-import { getListAPI, deleteListAPI, postAPI } from '../../../api'
+import { getListAPI, deleteListAPI } from '../../../api'
 import utils from '../../../utils'
 
 export default {
@@ -81,6 +84,8 @@ export default {
   components: { Pagination },
   data: () => ({
     dialog: false,
+    message: '',
+    isSingle: undefined,
     search: undefined,
     total: 0,
     items: [],
@@ -90,11 +95,7 @@ export default {
       page: 1,
       itemsPerPage: 10,
       sortBy: [],
-      sortDesc: [],
-      groupBy: [],
-      groupDesc: [],
-      multiSort: false,
-      mustSort: false
+      sortDesc: []
     },
     pagination: {},
     headers: [
@@ -103,7 +104,7 @@ export default {
       { text: 'URL', align: 'center', sortable: false, value: 'url' },
       { text: 'Created Time', align: 'center', value: 'createTime' },
       { text: 'Update Time', align: 'center', value: 'updateTime' },
-      { text: 'Operate', align: 'center', sortable: false, value: 'operate', width: 200 }
+      { text: 'Operate', align: 'center', sortable: false, value: 'operate' }
     ]
   }),
   watch: {
@@ -143,24 +144,32 @@ export default {
           this.items = []
         })
     },
-    deleteItem (id) {
-      deleteListAPI('/siamese-item-interface/article', { ids: id || utils.getArrayParam(this.selected, 'id') })
+    deleteItem () {
+      deleteListAPI('/siamese-item-interface/article',
+        { ids: utils.handlerParam(this.selected, 'id') })
         .then(response => {
-          if (response && response.data.code === 20000) {}
+          if (response && response.data.code === 20000) {
+            this.getDataFromApi()
+            this.dialog = false
+          }
         })
     },
-    openUpdateDialog (item) {},
-    addArticle () {
-      const formData = new FormData()
-      formData.append('title', 'Java')
-      formData.append('subtitle', 'Java基础')
-      formData.append('title', 'Java')
-      formData.append('file', this.file)
-      postAPI('/siamese-item-interface/article', formData, { contentType: 'multipart/form-data' })
-        .then(response => {
-          console.log(response)
-        })
-    }
+    openDeleteDialog (item) {
+      if (item) {
+        this.selected = [item]
+        this.isSingle = true
+      } else {
+        this.isSingle = false
+      }
+      this.dialog = true
+    },
+    cancelDelete () {
+      if (this.isSingle) {
+        this.selected = []
+      }
+      this.dialog = false
+    },
+    openUpdateDialog (item) {}
   }
 }
 </script>

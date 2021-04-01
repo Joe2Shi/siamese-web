@@ -8,7 +8,7 @@ function toHump (name) {
   })
 }
 
-function getArrayParam (array, key) {
+function handlerParam (array, key) {
   const params = []
   array.forEach(item => {
     params.push(item[key])
@@ -19,5 +19,5 @@ function getArrayParam (array, key) {
 export default {
   toLine,
   toHump,
-  getArrayParam
+  handlerParam
 }
