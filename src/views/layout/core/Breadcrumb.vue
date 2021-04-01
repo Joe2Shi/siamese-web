@@ -24,7 +24,7 @@ export default {
     }
   },
   methods: {
-    getItems: function (breadcrumbs) {
+    getItems (breadcrumbs) {
       this.items = []
       for (let i = 0; i < breadcrumbs.length; i++) {
         if (i !== 0) {

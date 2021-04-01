@@ -26,7 +26,7 @@ export default {
     ...mapState(['language'])
   },
   methods: {
-    switchLanguage: function (language) {
+    switchLanguage (language) {
       this.$i18n.locale = language
       this.$store.dispatch('switchLanguage', language)
     }

@@ -1,5 +1,5 @@
 <template>
-  <v-card flat tile class="dashboard">
+  <v-card flat tile class="dashboard" min-height="748">
     <div v-if="chart">
       <apexchart type="line" :options="lineOptions" :series="lineSeries" height="320"/>
     </div>
@@ -135,7 +135,7 @@ export default {
     this.switchChartsTheme()
   },
   methods: {
-    switchChartsTheme: function () {
+    switchChartsTheme () {
       if (this.$vuetify.theme.dark) this.lineOptions = this.darkLineOptions
       else this.lineOptions = this.lightLineOptions
     },

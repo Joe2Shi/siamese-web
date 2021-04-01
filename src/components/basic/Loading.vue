@@ -14,10 +14,10 @@ export default {
     }
   },
   methods: {
-    hidden: function () {
+    hidden () {
       document.getElementById('loading').classList.add('hide')
     },
-    show: function () {
+    show () {
       document.getElementById('loading').classList.remove('hide')
     }
   },

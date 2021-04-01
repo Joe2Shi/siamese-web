@@ -32,7 +32,7 @@ export default {
   props: ['github'],
   methods: {
     ...mapActions(['switchDrawer']),
-    showDrawer: function () {
+    showDrawer () {
       this.switchDrawer(true)
     }
   }

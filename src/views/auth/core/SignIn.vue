@@ -88,21 +88,20 @@ export default {
   }),
   methods: {
     ...mapActions(['showSnackbar', 'switchTheme']),
-    signIn: function () {
+    signIn () {
       const that = this
-      that.loading = true
       if (that.$refs.signInForm.validate()) {
+        that.loading = true
         postAPI('/siamese-auth/accredit', that.signInForm)
           .then(response => {
             that.loading = false
-            if (response.data.code === 20000) {
+            if (response && response.data.code === 20000) {
               localStorage.setItem('token', response.data.data)
-              that.showSnackbar({ message: response.data.message, color: 'success' })
               setTimeout(function () {
                 that.$router.push({ path: '/dashboard' })
               }, 1000)
             }
-            if (response.data.code === 40004) {
+            if (response.data.code === 10001) {
               that.loading = false
               this.wrongPassword = true
               this.errorMessage = response.data.message
