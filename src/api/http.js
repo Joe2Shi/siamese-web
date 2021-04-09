@@ -18,12 +18,13 @@ const http = {
     if (headers) config.headers = headers
     return request(config)
   },
-  put (url, params) {
+  put (url, params, headers) {
     const config = {
       method: 'put',
       url: url
     }
-    if (params) config.params = params
+    if (params) config.data = params
+    if (headers) config.headers = headers
     return request(config)
   },
   delete (url, params) {

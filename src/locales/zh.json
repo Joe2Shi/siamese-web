@@ -40,7 +40,7 @@
     },
     "Article": {
       "Search": "搜索",
-      "Add": "添加",
+      "New": "新建",
       "Edit": "编辑",
       "Delete": "删除",
       "NoData": "暂无数据",
@@ -51,7 +51,7 @@
       "ArticleTitleRequiredTip": "文章标题为必填项",
       "ArticleSubtitleRequiredTip": "文章副标题为必填项",
       "MarkdownFileRequiredTip": "Markdown文件为必填项",
-      "AddArticle": "新增文章",
+      "NewArticle": "新建文章",
       "EditArticle": "编辑文章",
       "Title": "标题",
       "Subtitle": "副标题",

@@ -11,8 +11,8 @@ export function postAPI (url, params, headers) {
 }
 
 // put
-export function putAPI (url, params) {
-  return http.put(url, params)
+export function putAPI (url, params, headers) {
+  return http.put(url, params, headers)
 }
 
 // delete

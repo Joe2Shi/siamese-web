@@ -1,9 +1,9 @@
 <template>
   <v-card flat tile class="article" min-height="748">
     <v-card flat tile class="pt-4 px-8">
-      <v-btn elevation="0" color="primary" small class="text-caption text-none mr-3" @click="openAddDialog()">
+      <v-btn elevation="0" color="primary" small class="text-caption text-none mr-3" @click="openNewDialog()">
         <v-icon left small>mdi-plus</v-icon>
-        {{$t('Page.Article.Add')}}
+        {{$t('Page.Article.New')}}
       </v-btn>
       <v-btn elevation="0" color="error" @click="openDeleteDialog()" small :disabled="selected.length < 1" class="text-caption text-none">
         <v-icon left small>mdi-trash-can-outline</v-icon>
@@ -70,24 +70,24 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <!-- Add dialog -->
-    <v-dialog v-model="addDialog" max-width="650" transition="dialog-bottom-transition">
+    <!-- New dialog -->
+    <v-dialog v-model="newDialog" max-width="650" transition="dialog-bottom-transition">
       <v-card :loading="loading">
         <basic-tick/>
         <v-card-title>
-          {{$t('Page.Article.AddArticle')}}
+          {{$t('Page.Article.NewArticle')}}
           <v-spacer/>
-          <v-btn icon small @click="cancelAdd()">
+          <v-btn icon small @click="cancelNew()">
             <v-icon small>mdi-close</v-icon>
           </v-btn>
         </v-card-title>
         <v-divider/>
-        <v-form ref="addArticleInForm" autocomplete="off" lazy-validation>
+        <v-form ref="newArticleInForm" autocomplete="off" lazy-validation>
           <v-container>
             <v-row>
               <v-col cols="11" class="mx-auto">
                 <v-text-field
-                  v-model="addForm.title"
+                  v-model="newForm.title"
                   :label="$t('Page.Article.Title')"
                   :placeholder="$t('Page.Article.TitleEnterTip')"
                   class="text-caption"
@@ -97,7 +97,7 @@
                   clearable
                   :rules="[value => !!value || $t('Page.Article.ArticleTitleRequiredTip')]"/>
                 <v-textarea
-                  v-model="addForm.subtitle"
+                  v-model="newForm.subtitle"
                   :label="$t('Page.Article.Subtitle')"
                   :placeholder="$t('Page.Article.SubtitleEnterTip')"
                   class="text-caption"
@@ -107,7 +107,7 @@
                   clearable
                   :rules="[value => !!value || $t('Page.Article.ArticleSubtitleRequiredTip')]"/>
                 <v-file-input
-                  v-model="addForm.file"
+                  v-model="newForm.file"
                   :label="$t('Page.Article.MarkdownFile')"
                   class="text-caption"
                   show-size
@@ -131,10 +131,10 @@
         </v-form>
         <v-card-actions>
           <v-spacer/>
-          <v-btn color="info" text class="text-none" @click="cancelAdd()">
+          <v-btn color="info" text class="text-none" @click="cancelNew()">
             {{$t('Page.Article.Cancel')}}
           </v-btn>
-          <v-btn color="primary" text class="text-none" @click="addArticleApi()">
+          <v-btn color="primary" text class="text-none" @click="newArticleApi()">
             {{$t('Page.Article.Confirm')}}
           </v-btn>
         </v-card-actions>
@@ -142,7 +142,7 @@
     </v-dialog>
     <!-- Edit dialog -->
     <v-dialog v-model="editDialog" max-width="650" transition="dialog-bottom-transition">
-      <v-card>
+      <v-card :loading="loading">
         <basic-tick/>
         <v-card-title>
           {{$t('Page.Article.EditArticle')}}
@@ -204,7 +204,7 @@
           <v-btn color="info" text class="text-none" @click="cancelEdit()">
             {{$t('Page.Article.Cancel')}}
           </v-btn>
-          <v-btn color="primary" text class="text-none">
+          <v-btn color="primary" text class="text-none" @click="editArticleApi()">
             {{$t('Page.Article.Confirm')}}
           </v-btn>
         </v-card-actions>
@@ -216,7 +216,7 @@
 <script>
 import Pagination from '../../../components/page/Pagination'
 import BasicTick from '../../../components/basic/BasicTick'
-import { getListAPI, postAPI, deleteListAPI } from '../../../api'
+import { getListAPI, postAPI, deleteListAPI, putAPI } from '../../../api'
 import utils from '../../../utils'
 
 export default {
@@ -225,10 +225,10 @@ export default {
   data: () => ({
     loading: false,
     tipDialog: false,
-    addDialog: false,
+    newDialog: false,
     editDialog: false,
-    addForm: { title: '', subtitle: '', file: undefined },
-    editForm: { id: '', title: '', subtitle: '', file: undefined },
+    newForm: { title: '', subtitle: '', file: undefined },
+    editForm: { id: '', title: '', subtitle: '', oldAddress: '', file: undefined },
     message: '',
     isSingle: undefined,
     search: undefined,
@@ -289,9 +289,9 @@ export default {
       deleteListAPI('/siamese-item-interface/article',
         { ids: utils.handlerParam(this.selected, 'id') })
         .then(response => {
+          this.tipDialog = false
           if (response && response.data.code === 20000) {
             this.getDataFromApi()
-            this.tipDialog = false
           }
         })
     },
@@ -314,26 +314,42 @@ export default {
       this.editForm.id = item.id
       this.editForm.title = item.title
       this.editForm.subtitle = item.subtitle
+      this.editForm.oldAddress = item.address
       const tempArray = item.address.split('/')
       this.editForm.file = new File([], tempArray[tempArray.length - 1])
       this.editDialog = true
     },
-    openAddDialog () {
-      this.addDialog = true
+    openNewDialog () {
+      this.newDialog = true
     },
-    cancelAdd () {
-      this.$refs.addArticleInForm.reset()
-      this.addDialog = false
-    },
-    addArticleApi () {
-      if (this.$refs.addArticleInForm.validate()) {
+    editArticleApi () {
+      if (this.$refs.editArticleInForm.validate()) {
         this.loading = true
-        postAPI('/siamese-item-interface/article', utils.objectToFormData(this.addForm), { contentType: 'application/form-data' })
+        putAPI('/siamese-item-interface/article', utils.objectToFormData(this.editForm), { contentType: 'application/form-data' })
           .then(response => {
             this.loading = false
             if (response && response.data.code === 20000) {
-              this.$refs.addArticleInForm.reset()
-              this.cancelAdd()
+              this.cancelEdit()
+              this.getDataFromApi()
+            }
+          })
+          .catch(() => {
+            this.loading = false
+          })
+      }
+    },
+    cancelNew () {
+      this.$refs.newArticleInForm.reset()
+      this.newDialog = false
+    },
+    newArticleApi () {
+      if (this.$refs.newArticleInForm.validate()) {
+        this.loading = true
+        postAPI('/siamese-item-interface/article', utils.objectToFormData(this.newForm), { contentType: 'application/form-data' })
+          .then(response => {
+            this.loading = false
+            if (response && response.data.code === 20000) {
+              this.cancelNew()
               this.getDataFromApi()
             }
           })

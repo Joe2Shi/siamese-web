@@ -40,7 +40,7 @@
     },
     "Article": {
       "Search": "Search",
-      "Add": "Add",
+      "New": "New",
       "Edit": "Edit",
       "Delete": "Delete",
       "NoData": "No Data",
@@ -51,7 +51,7 @@
       "ArticleTitleRequiredTip": "Article title is required",
       "ArticleSubtitleRequiredTip": "Article subtitle is required",
       "MarkdownFileRequiredTip": "Markdown file is required",
-      "AddArticle": "Add Article",
+      "NewArticle": "New Article",
       "EditArticle": "Edit Article",
       "Title": "Title",
       "Subtitle": "Subtitle",
