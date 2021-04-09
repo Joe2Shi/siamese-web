@@ -1,7 +1,7 @@
 <template>
   <v-card flat tile class="article" min-height="748">
     <v-card flat tile class="pt-4 px-8">
-      <v-btn elevation="0" color="primary" small class="text-caption text-none mr-3">
+      <v-btn elevation="0" color="primary" small class="text-caption text-none mr-3" @click="openAddDialog()">
         <v-icon left small>mdi-plus</v-icon>
         {{$t('Page.Article.Add')}}
       </v-btn>
@@ -36,7 +36,6 @@
         v-model="selected"
         :options.sync="options"
         :server-items-length="total"
-        :loading="loading"
         class="elevation-0">
         <template v-slot:item.operate="{ item }">
           <v-btn elevation="0" @click="openUpdateDialog(item)" text color="warning" small class="text-caption text-none mr-3">
@@ -54,7 +53,7 @@
         </template>
       </v-data-table>
     </v-card>
-    <v-dialog v-model="dialog" max-width="400">
+    <v-dialog v-model="tipDialog" max-width="400">
       <v-card>
         <v-card-text class="pt-3 pb-0">
           <v-icon color="warning" class="dialog mr-4">mdi-alert-outline</v-icon>
@@ -65,7 +64,147 @@
           <v-btn color="info" text @click="cancelDelete()" small class="text-none">
             {{$t('Page.Article.Cancel')}}
           </v-btn>
-          <v-btn color="primary" text @click="deleteItem()" small class="text-none">
+          <v-btn color="primary" text @click="deleteItemApi()" small class="text-none">
+            {{$t('Page.Article.Confirm')}}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- Add dialog -->
+    <v-dialog v-model="addDialog" max-width="650" transition="dialog-bottom-transition">
+      <v-card :loading="loading">
+        <basic-tick/>
+        <v-card-title>
+          {{$t('Page.Article.AddArticle')}}
+          <v-spacer/>
+          <v-btn icon small @click="cancelAdd()">
+            <v-icon small>mdi-close</v-icon>
+          </v-btn>
+        </v-card-title>
+        <v-divider/>
+        <v-form ref="addArticleInForm" autocomplete="off" lazy-validation>
+          <v-container>
+            <v-row>
+              <v-col cols="11" class="mx-auto">
+                <v-text-field
+                  v-model="addForm.title"
+                  :label="$t('Page.Article.Title')"
+                  :placeholder="$t('Page.Article.TitleEnterTip')"
+                  class="text-caption"
+                  dense
+                  counter="50"
+                  outlined
+                  clearable
+                  :rules="[value => !!value || $t('Page.Article.ArticleTitleRequiredTip')]"/>
+                <v-textarea
+                  v-model="addForm.subtitle"
+                  :label="$t('Page.Article.Subtitle')"
+                  :placeholder="$t('Page.Article.SubtitleEnterTip')"
+                  class="text-caption"
+                  rows="3"
+                  counter="200"
+                  outlined
+                  clearable
+                  :rules="[value => !!value || $t('Page.Article.ArticleSubtitleRequiredTip')]"/>
+                <v-file-input
+                  v-model="addForm.file"
+                  :label="$t('Page.Article.MarkdownFile')"
+                  class="text-caption"
+                  show-size
+                  small-chips
+                  truncate-length="50"
+                  outlined
+                  dense
+                  clearable
+                  prepend-icon=""
+                  :placeholder="$t('Page.Article.MarkdownFileSelectTip')"
+                  :rules="[value => !!value || $t('Page.Article.MarkdownFileRequiredTip')]">
+                  <template v-slot:selection="{ text }">
+                    <v-chip color="primary" label small>
+                      {{ text }}
+                    </v-chip>
+                  </template>
+                </v-file-input>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-form>
+        <v-card-actions>
+          <v-spacer/>
+          <v-btn color="info" text class="text-none" @click="cancelAdd()">
+            {{$t('Page.Article.Cancel')}}
+          </v-btn>
+          <v-btn color="primary" text class="text-none" @click="addArticleApi()">
+            {{$t('Page.Article.Confirm')}}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- Edit dialog -->
+    <v-dialog v-model="editDialog" max-width="650" transition="dialog-bottom-transition">
+      <v-card>
+        <basic-tick/>
+        <v-card-title>
+          {{$t('Page.Article.EditArticle')}}
+          <v-spacer/>
+          <v-btn icon small @click="cancelEdit()">
+            <v-icon small>mdi-close</v-icon>
+          </v-btn>
+        </v-card-title>
+        <v-divider/>
+        <v-form ref="editArticleInForm" autocomplete="off" lazy-validation>
+          <v-container>
+            <v-row>
+              <v-col cols="11" class="mx-auto">
+                <v-text-field
+                  v-model="editForm.title"
+                  :label="$t('Page.Article.Title')"
+                  :placeholder="$t('Page.Article.TitleEnterTip')"
+                  class="text-caption"
+                  dense
+                  counter="50"
+                  outlined
+                  clearable
+                  :rules="[value => !!value || $t('Page.Article.ArticleTitleRequiredTip')]"/>
+                <v-textarea
+                  v-model="editForm.subtitle"
+                  :label="$t('Page.Article.Subtitle')"
+                  :placeholder="$t('Page.Article.SubtitleEnterTip')"
+                  class="text-caption"
+                  rows="3"
+                  counter="200"
+                  outlined
+                  clearable
+                  :rules="[value => !!value || $t('Page.Article.ArticleSubtitleRequiredTip')]"/>
+                <v-file-input
+                  v-model="editForm.file"
+                  :label="$t('Page.Article.MarkdownFile')"
+                  class="text-caption"
+                  :show-size="editForm.file && editForm.file.size > 0"
+                  small-chips
+                  truncate-length="50"
+                  outlined
+                  dense
+                  clearable
+                  prepend-icon=""
+                  :placeholder="$t('Page.Article.MarkdownFileSelectTip')"
+                  :rules="[value => !!value || $t('Page.Article.MarkdownFileRequiredTip')]">
+                  <template v-slot:selection="{ text }">
+                    <v-chip color="primary" label small>
+                      {{ text }}
+                    </v-chip>
+                  </template>
+                </v-file-input>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-form>
+        <v-card-actions>
+          <v-spacer/>
+          <v-btn color="info" text class="text-none" @click="cancelEdit()">
+            {{$t('Page.Article.Cancel')}}
+          </v-btn>
+          <v-btn color="primary" text class="text-none">
             {{$t('Page.Article.Confirm')}}
           </v-btn>
         </v-card-actions>
@@ -76,21 +215,26 @@
 
 <script>
 import Pagination from '../../../components/page/Pagination'
-import { getListAPI, deleteListAPI } from '../../../api'
+import BasicTick from '../../../components/basic/BasicTick'
+import { getListAPI, postAPI, deleteListAPI } from '../../../api'
 import utils from '../../../utils'
 
 export default {
   name: 'Article',
-  components: { Pagination },
+  components: { Pagination, BasicTick },
   data: () => ({
-    dialog: false,
+    loading: false,
+    tipDialog: false,
+    addDialog: false,
+    editDialog: false,
+    addForm: { title: '', subtitle: '', file: undefined },
+    editForm: { id: '', title: '', subtitle: '', file: undefined },
     message: '',
     isSingle: undefined,
     search: undefined,
     total: 0,
     items: [],
     selected: [],
-    loading: false,
     options: {
       page: 1,
       itemsPerPage: 10,
@@ -101,7 +245,7 @@ export default {
     headers: [
       { text: 'Title', align: 'center', sortable: false, value: 'title' },
       { text: 'Subtitle', align: 'center', sortable: false, value: 'subtitle' },
-      { text: 'URL', align: 'center', sortable: false, value: 'url' },
+      { text: 'File Address', align: 'center', sortable: false, value: 'address' },
       { text: 'Created Time', align: 'center', value: 'createTime' },
       { text: 'Update Time', align: 'center', value: 'updateTime' },
       { text: 'Operate', align: 'center', sortable: false, value: 'operate' }
@@ -120,7 +264,6 @@ export default {
   },
   methods: {
     getDataFromApi () {
-      this.loading = true
       const { page, itemsPerPage, sortBy, sortDesc } = this.options
       let name
       if (sortBy.length > 0) {
@@ -129,7 +272,6 @@ export default {
       getListAPI('/siamese-item-interface/article/page',
         { key: this.search, page: page, rows: itemsPerPage, sortBy: name, desc: sortDesc[0] })
         .then(response => {
-          this.loading = false
           if (response && response.data.code === 10000) {
             this.total = response.data.data.total
             this.items = response.data.data.items
@@ -139,18 +281,17 @@ export default {
           }
         })
         .catch(() => {
-          this.loading = false
           this.total = 0
           this.items = []
         })
     },
-    deleteItem () {
+    deleteItemApi () {
       deleteListAPI('/siamese-item-interface/article',
         { ids: utils.handlerParam(this.selected, 'id') })
         .then(response => {
           if (response && response.data.code === 20000) {
             this.getDataFromApi()
-            this.dialog = false
+            this.tipDialog = false
           }
         })
     },
@@ -161,15 +302,50 @@ export default {
       } else {
         this.isSingle = false
       }
-      this.dialog = true
+      this.tipDialog = true
     },
     cancelDelete () {
       if (this.isSingle) {
         this.selected = []
       }
-      this.dialog = false
+      this.tipDialog = false
     },
-    openUpdateDialog (item) {}
+    openUpdateDialog (item) {
+      this.editForm.id = item.id
+      this.editForm.title = item.title
+      this.editForm.subtitle = item.subtitle
+      const tempArray = item.address.split('/')
+      this.editForm.file = new File([], tempArray[tempArray.length - 1])
+      this.editDialog = true
+    },
+    openAddDialog () {
+      this.addDialog = true
+    },
+    cancelAdd () {
+      this.$refs.addArticleInForm.reset()
+      this.addDialog = false
+    },
+    addArticleApi () {
+      if (this.$refs.addArticleInForm.validate()) {
+        this.loading = true
+        postAPI('/siamese-item-interface/article', utils.objectToFormData(this.addForm), { contentType: 'application/form-data' })
+          .then(response => {
+            this.loading = false
+            if (response && response.data.code === 20000) {
+              this.$refs.addArticleInForm.reset()
+              this.cancelAdd()
+              this.getDataFromApi()
+            }
+          })
+          .catch(() => {
+            this.loading = false
+          })
+      }
+    },
+    cancelEdit () {
+      this.$refs.editArticleInForm.reset()
+      this.editDialog = false
+    }
   }
 }
 </script>

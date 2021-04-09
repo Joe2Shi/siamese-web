@@ -47,7 +47,18 @@
       "LoadingItems": "Loading Items",
       "Cancel": "Cancel",
       "Confirm": "Confirm",
-      "ConfirmDeleteTip": "Are you sure you wish to remove?"
+      "ConfirmDeleteTip": "Are you sure you wish to remove?",
+      "ArticleTitleRequiredTip": "Article title is required",
+      "ArticleSubtitleRequiredTip": "Article subtitle is required",
+      "MarkdownFileRequiredTip": "Markdown file is required",
+      "AddArticle": "Add Article",
+      "EditArticle": "Edit Article",
+      "Title": "Title",
+      "Subtitle": "Subtitle",
+      "MarkdownFile": "Markdown File",
+      "TitleEnterTip": "Please enter article title",
+      "SubtitleEnterTip": "Please enter article subtitle",
+      "MarkdownFileSelectTip": "Please select markdown file"
     }
   }
 }

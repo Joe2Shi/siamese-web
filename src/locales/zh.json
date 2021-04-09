@@ -47,7 +47,18 @@
       "LoadingItems": "数据加载中",
       "Cancel": "取消",
       "Confirm": "确认",
-      "ConfirmDeleteTip": "你确定要删除吗？"
+      "ConfirmDeleteTip": "你确定要删除吗？",
+      "ArticleTitleRequiredTip": "文章标题为必填项",
+      "ArticleSubtitleRequiredTip": "文章副标题为必填项",
+      "MarkdownFileRequiredTip": "Markdown文件为必填项",
+      "AddArticle": "新增文章",
+      "EditArticle": "编辑文章",
+      "Title": "标题",
+      "Subtitle": "副标题",
+      "MarkdownFile": "Markdown文件",
+      "TitleEnterTip": "请输入文章标题",
+      "SubtitleEnterTip": "请输入文章副标题",
+      "MarkdownFileSelectTip": "请选择Markdown文件"
     }
   }
 }
