@@ -5,12 +5,14 @@
   "Menu": {
     "SignIn": "登录",
     "Dashboard": "首页",
-    "Article": "文章"
+    "Article": "文章",
+    "Markdown": "Markdown"
   },
   "Title": {
     "SignIn": "登录",
     "SystemOverview": "系统总览",
-    "ArticleManagement": "文章管理"
+    "ArticleManagement": "文章管理",
+    "Markdown": "Markdown"
   },
   "System": {
     "ConnectTimeout": "连接超时",

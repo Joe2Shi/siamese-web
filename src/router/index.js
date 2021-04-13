@@ -28,6 +28,15 @@ const routes = [
           title: 'ArticleManagement'
         },
         component: () => import('../views/app/article/Index.vue')
+      },
+      {
+        path: '/markdown',
+        name: 'Markdown',
+        meta: {
+          name: 'Markdown',
+          title: 'Markdown'
+        },
+        component: () => import('../views/app/Markdown.vue')
       }
     ]
   },

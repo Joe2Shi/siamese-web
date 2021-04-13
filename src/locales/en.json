@@ -5,12 +5,14 @@
   "Menu": {
     "SignIn": "Sign In",
     "Dashboard": "Dashboard",
-    "Article": "Article"
+    "Article": "Article",
+    "Markdown": "Markdown"
   },
   "Title": {
     "SignIn": "Sign In",
     "SystemOverview": "System Overview",
-    "ArticleManagement": "Article Management"
+    "ArticleManagement": "Article Management",
+    "Markdown": "Markdown"
   },
   "System": {
     "ConnectTimeout": "Connect timeout",
