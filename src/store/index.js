@@ -12,7 +12,11 @@ export default new Vuex.Store({
     loading: false,
     message: null,
     color: null,
-    icon: null
+    icon: null,
+    directory: [],
+    anchor: undefined,
+    offsetTop: 0,
+    scroll: true
   },
   mutations: {
     SWITCH_THEME: (state, payload) => {
@@ -47,6 +51,18 @@ export default new Vuex.Store({
       state.message = payload.message
       state.color = payload.color
       state.icon = payload.icon
+    },
+    SET_DIRECTORY: (state, payload) => {
+      state.directory = payload
+    },
+    SET_ANCHOR: (state, payload) => {
+      state.anchor = payload
+    },
+    SET_OFFSET_TOP: (state, payload) => {
+      state.offsetTop = payload
+    },
+    SET_SCROLL: (state, payload) => {
+      state.scroll = payload
     }
   },
   actions: {
@@ -64,6 +80,18 @@ export default new Vuex.Store({
     },
     showSnackbar ({ commit }, payload) {
       commit('SHOW_SNACKBAR', payload)
+    },
+    setDirectory ({ commit }, payload) {
+      commit('SET_DIRECTORY', payload)
+    },
+    setAnchor ({ commit }, payload) {
+      commit('SET_ANCHOR', payload)
+    },
+    setOffsetTop ({ commit }, payload) {
+      commit('SET_OFFSET_TOP', payload)
+    },
+    setScroll ({ commit }, payload) {
+      commit('SET_SCROLL:', payload)
     }
   },
   getters: {
@@ -73,6 +101,10 @@ export default new Vuex.Store({
     loading: state => state.loading,
     text: state => state.message,
     color: state => state.color,
-    icon: state => state.icon
+    icon: state => state.icon,
+    directory: state => state.directory,
+    anchor: state => state.anchor,
+    offsetTop: state => state.offsetTop,
+    scroll: state => state.scroll
   }
 })

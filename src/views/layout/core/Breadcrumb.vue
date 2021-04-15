@@ -18,6 +18,7 @@ export default {
   watch: {
     '$route.matched' (newValue) {
       this.getItems(newValue)
+      this.$store.state.directory = []
     },
     'language' () {
       this.getItems(this.$route.matched)

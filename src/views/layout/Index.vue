@@ -14,6 +14,7 @@
         </v-card>
       </v-card>
     </v-main>
+    <directory/>
   </v-card>
 </template>
 
@@ -23,6 +24,7 @@ import BasicTick from '../../components/basic/BasicTick'
 import Breadcrumb from './core/Breadcrumb'
 import NavBar from './core/NavBar'
 import SideBar from './core/SideBar'
+import Directory from '../layout/core/Directory'
 import { mapActions, mapState } from 'vuex'
 import { getListAPI } from '../../api'
 
@@ -34,7 +36,8 @@ export default {
     BasicTick,
     NavBar,
     SideBar,
-    Breadcrumb
+    Breadcrumb,
+    Directory
   },
   data: () => ({
     user: {
