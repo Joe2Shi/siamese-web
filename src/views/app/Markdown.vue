@@ -1,13 +1,15 @@
 <template>
   <v-card flat tile v-scroll="onScroll" min-height="748">
-    <div>
-      <v-md-editor
-        ref="editor"
-        mode="preview"
-        v-model="markdown"
-        :include-level="[2, 4]"
-        @copy-code-success="handleCopyCodeSuccess"/>
-    </div>
+    <v-row>
+      <v-col xl="7" lg="8" md="10" sm="12" class="mx-auto">
+        <v-md-editor
+          ref="editor"
+          mode="preview"
+          v-model="markdown"
+          :include-level="[2, 4]"
+          @copy-code-success="handleCopyCodeSuccess"/>
+      </v-col>
+    </v-row>
   </v-card>
 </template>
 
@@ -21,7 +23,7 @@ export default {
     markdown: '',
     offsetTop: 0,
     requestData: {
-      address: 'http://file.joe2shi.com/markdown/M00/00/00/wKgBcGBwN4yAAYOVAAAVm426Nx04317.md'
+      address: 'http://file.joe2shi.com/markdown/M00/00/00/wKgBcGB4_FqAalv7AAANTK0HJG84169.md'
     }
   }),
   mounted () {

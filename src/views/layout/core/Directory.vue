@@ -1,7 +1,7 @@
 <template>
-  <v-navigation-drawer color="accent" right floating clipped app>
+  <v-navigation-drawer color="accent" right floating clipped app class="directory">
     <ul class="pa-6" v-if="directory.length > 0">
-      <li :class="`pl-${3 * (anchor.indent + 1)} text-caption py-1 font-weight-regular primary--text directory-item`"
+      <li :class="`pl-${2 * (anchor.indent + 1)} text-caption py-1 font-weight-regular primary--text directory-item`"
           v-for="(anchor,index) in directory"
           :key="index"
           @click="goto(anchor)">

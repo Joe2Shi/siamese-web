@@ -244,11 +244,10 @@ export default {
     pagination: {},
     headers: [
       { text: 'Title', align: 'center', sortable: false, value: 'title' },
-      { text: 'Subtitle', align: 'center', sortable: false, value: 'subtitle' },
       { text: 'File Address', align: 'center', sortable: false, value: 'address' },
       { text: 'Created Time', align: 'center', value: 'createTime' },
       { text: 'Update Time', align: 'center', value: 'updateTime' },
-      { text: 'Operate', align: 'center', sortable: false, value: 'operate' }
+      { text: 'Operate', align: 'center', sortable: false, value: 'operate', width: 200 }
     ]
   }),
   watch: {

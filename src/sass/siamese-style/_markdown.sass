@@ -4,9 +4,6 @@
 .v-md-editor
   background-color: inherit !important
 
-.vuepress-markdown-body
-  font-family: 'Quicksand', 'PingFang', sans-serif !important
-
 .theme--light
   .vuepress-markdown-body
     color: #2c3e50 !important
@@ -34,9 +31,15 @@
   .CodeMirror-activeline-background
     background: #e8f2ff
 
+  .v-md-editor__left-area-title
+    font-size: 13px
+
+  .v-md-editor__toc-nav-title
+    font-size: 13px
+
 .theme--dark
   .vuepress-markdown-body
-    color: #f9f9f9 !important
+    color: #dddddd !important
 
   .v-md-editor__toolbar-divider:before
     border-left: 1px solid hsla(0, 0%, 100%, .12)
@@ -65,7 +68,18 @@
     background: #333333
 
   .vuepress-markdown-body h2
-    border-bottom: 1px solid hsla(0,0%,100%,.12)
+    border-bottom: 1px solid hsla(0, 0%, 100%, .12)
+
+  .directory li a.text--disabled
+    color: #e5e5e5 !important
+
+  .v-md-editor__left-area-title
+    font-size: 13px
+    color: #ffffff
+
+  .v-md-editor__toc-nav-title
+    font-size: 13px
+    color: #ffffff
 
 .vuepress-markdown-body code
   font-weight: 100
@@ -97,3 +111,23 @@
 .v-md-editor-preview
   padding: 12px !important
 
+  li
+    font-size: .85rem
+    margin-bottom: 5px
+
+  li p
+    font-size: .85rem
+    margin-bottom: 5px
+
+  h1
+    margin-bottom: 15px
+
+  h2, h3, h4, h5, h6
+    margin: 15px 0
+
+.directory
+  ul
+    list-style-type: none
+
+    li.router-link-active
+      border-left-color: currentColor
