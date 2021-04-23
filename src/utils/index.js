@@ -1,4 +1,5 @@
 function toLine (name) {
+  name = name.replace(/Format/g, '')
   return name.replace(/([A-Z])/g, '_$1').toLowerCase()
 }
 

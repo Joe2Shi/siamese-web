@@ -34,7 +34,16 @@
                 v-model="signInForm.password"
                 @click:append="showPassword = !showPassword"
                 :rules="[value => !!value || $t('Page.SignIn.PasswordRequiredTip')]"/>
-              <v-btn elevation="0" large block color="primary" class="text-body-1 text-none mb-5" @click="signIn" :loading="loading">{{$t('Page.SignIn.SignIn')}}</v-btn>
+              <v-btn
+                  elevation="0"
+                  large
+                  block
+                  color="primary"
+                  class="text-body-1 text-none mb-5"
+                  @click="signIn"
+                  :loading="loading">
+                {{$t('Page.SignIn.SignIn')}}
+              </v-btn>
               <div class="text-center text-body-2"><a href="">{{$t('Page.SignIn.ForgotPassword')}}</a></div>
               <div class="d-flex my-4">
                 <v-divider class="my-4"/>
@@ -77,8 +86,8 @@ export default {
     wrongPassword: false,
     errorMessage: '',
     signInForm: {
-      username: 'Joe',
-      password: '19990628sq'
+      username: '',
+      password: ''
     },
     signInItems: [
       { icon: 'mdi-wechat', path: '' },

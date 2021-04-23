@@ -11,7 +11,7 @@
       </v-btn>
     </v-card>
     <v-row class="d-flex justify-end mx-0">
-      <v-col xl="3" lg="4" md="5" sm="8" class="mx-8 pt-0">
+      <v-col xl="3" lg="4" md="5" sm="8" class="mx-8 pt-2">
         <v-text-field
           v-model="search"
           dense
@@ -31,12 +31,24 @@
         :no-data-text="$t('Page.Article.NoData')"
         :loading-text="$t('Page.Article.LoadingItems')"
         :show-select="true"
-        :headers="headers"
+        :headers="[
+          { text: $t('Page.Article.Preview'), align: 'center', sortable: false, value: 'title' },
+          { text: $t('Page.Article.Download'), align: 'center', sortable: false, value: 'address' },
+          { text: $t('Page.Article.CreatedTime'), align: 'center', value: 'createTimeFormat' },
+          { text: $t('Page.Article.UpdateTime'), align: 'center', value: 'updateTimeFormat' },
+          { text: $t('Page.Article.Operate'), align: 'center', sortable: false, value: 'operate' }
+        ]"
         :items="items"
         v-model="selected"
         :options.sync="options"
         :server-items-length="total"
         class="elevation-0">
+        <template v-slot:item.title="{ item }">
+          <a class="text-decoration-underline" @click="previewArticle(item.address)">{{item.title}}</a>
+        </template>
+        <template v-slot:item.address="{ item }">
+          <a class="text-decoration-underline" :href="item.address" :download="`${item.title}.md`">{{$t('Page.Article.Download')}}</a>
+        </template>
         <template v-slot:item.operate="{ item }">
           <v-btn elevation="0" @click="openUpdateDialog(item)" text color="warning" small class="text-caption text-none mr-3">
             <v-icon left small>mdi-square-edit-outline</v-icon>
@@ -112,7 +124,7 @@
                   class="text-caption"
                   show-size
                   small-chips
-                  truncate-length="50"
+                  truncate-length="30"
                   outlined
                   dense
                   clearable
@@ -182,7 +194,7 @@
                   class="text-caption"
                   :show-size="editForm.file && editForm.file.size > 0"
                   small-chips
-                  truncate-length="50"
+                  truncate-length="30"
                   outlined
                   dense
                   clearable
@@ -241,14 +253,7 @@ export default {
       sortBy: [],
       sortDesc: []
     },
-    pagination: {},
-    headers: [
-      { text: 'Title', align: 'center', sortable: false, value: 'title' },
-      { text: 'File Address', align: 'center', sortable: false, value: 'address' },
-      { text: 'Created Time', align: 'center', value: 'createTime' },
-      { text: 'Update Time', align: 'center', value: 'updateTime' },
-      { text: 'Operate', align: 'center', sortable: false, value: 'operate', width: 200 }
-    ]
+    pagination: {}
   }),
   watch: {
     options: {
@@ -360,6 +365,10 @@ export default {
     cancelEdit () {
       this.$refs.editArticleInForm.reset()
       this.editDialog = false
+    },
+    previewArticle (address) {
+      localStorage.setItem('address', address)
+      this.$router.push({ name: 'Markdown', path: '/markdown' })
     }
   }
 }

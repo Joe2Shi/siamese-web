@@ -23,9 +23,12 @@ export default {
     markdown: '',
     offsetTop: 0,
     requestData: {
-      address: 'http://file.joe2shi.com/markdown/M00/00/00/wKgBcGB4_FqAalv7AAANTK0HJG84169.md'
+      address: ''
     }
   }),
+  created () {
+    this.requestData.address = localStorage.address
+  },
   mounted () {
     this.init()
   },
@@ -58,7 +61,7 @@ export default {
           indent: hTags.indexOf(el.tagName),
           offsetTop: el.offsetTop + 141
         }))
-      }, 1)
+      }, 10)
     },
     handleCopyCodeSuccess () {
       this.showSnackbar({ message: 'Copy Success', color: 'success' })
