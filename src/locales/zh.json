@@ -3,9 +3,9 @@
     "ApplicationName": "Siamese Admin"
   },
   "Menu": {
-    "SignIn": "登录",
-    "Dashboard": "首页",
-    "Article": "文章",
+    "SignIn": "Sign In",
+    "Dashboard": "Dashboard",
+    "Article": "Article",
     "Markdown": "Markdown"
   },
   "Title": {
@@ -25,7 +25,7 @@
     "SignIn": {
       "Account": "账户",
       "SignIn": "登录",
-      "SignInSiameseAdmin": "登录 Siamese 后台管理",
+      "SignInSiameseAdmin": "SIAMESE ADMIN",
       "UsernameOrPhoneNumber": "用户名/手机号",
       "Password": "密码",
       "ForgotPassword": "忘记密码",

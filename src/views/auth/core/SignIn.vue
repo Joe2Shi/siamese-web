@@ -2,7 +2,7 @@
   <v-card flat tile class="sign-in">
     <v-row class="ma-0">
       <v-col xl="3" lg="4" md="5" sm="8" class="mx-auto">
-        <v-card flat class="pa-0 mx-auto mt-10">
+        <v-card flat class="pa-0 mx-auto mt-8">
           <div class="text-center text-uppercase text-caption text-overline primary--text mb-3">{{$t('Page.SignIn.Account')}}</div>
           <div class="text-h5 font-weight-bold mb-4 text-center">{{$t('Page.SignIn.SignInSiameseAdmin')}}</div>
           <v-form ref="signInForm" autocomplete="off" lazy-validation>
@@ -12,7 +12,7 @@
                 <theme/>
               </div>
               <v-text-field
-                class="text-body-2"
+                class="text-body-2 mb-3"
                 prepend-inner-icon="mdi-account-outline"
                 dense
                 clearable
