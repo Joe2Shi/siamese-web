@@ -11,7 +11,7 @@
       </v-btn>
     </v-card>
     <v-row class="d-flex justify-end mx-0">
-      <v-col xl="3" lg="4" md="5" sm="8" class="mx-8 pt-2">
+      <v-col xl="3" lg="4" md="5" sm="8" class="mx-5 pt-2">
         <v-text-field
           v-model="search"
           dense
@@ -124,7 +124,7 @@
                   class="text-caption"
                   show-size
                   small-chips
-                  truncate-length="30"
+                  truncate-length="21"
                   outlined
                   dense
                   clearable
@@ -194,7 +194,7 @@
                   class="text-caption"
                   :show-size="editForm.file && editForm.file.size > 0"
                   small-chips
-                  truncate-length="30"
+                  truncate-length="21"
                   outlined
                   dense
                   clearable
