@@ -6,13 +6,15 @@
     "SignIn": "Sign In",
     "Dashboard": "Dashboard",
     "Article": "Article",
-    "Markdown": "Markdown"
+    "Markdown": "Markdown",
+    "Demo": "Demo"
   },
   "Title": {
     "SignIn": "登录",
     "SystemOverview": "系统总览",
     "ArticleManagement": "文章管理",
-    "Markdown": "Markdown"
+    "Markdown": "Markdown",
+    "Demo": "演示"
   },
   "System": {
     "ConnectTimeout": "连接超时",
@@ -66,6 +68,12 @@
       "TitleEnterTip": "请输入文章标题",
       "SubtitleEnterTip": "请输入文章副标题",
       "MarkdownFileSelectTip": "请选择Markdown文件"
+    },
+    "Markdown": {
+      "CopySuccess": "复制成功"
+    },
+    "Demo": {
+      "CopySuccess": "复制成功"
     }
   }
 }

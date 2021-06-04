@@ -37,6 +37,15 @@ const routes = [
           title: 'Markdown'
         },
         component: () => import('../views/app/Markdown.vue')
+      },
+      {
+        path: '/demo',
+        name: 'Demo',
+        meta: {
+          name: 'Demo',
+          title: 'Demo'
+        },
+        component: () => import('../views/app/demo/Index.vue')
       }
     ]
   },

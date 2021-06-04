@@ -46,7 +46,9 @@ export default {
     miniVariant: false,
     items: [
       { text: 'Menu.Dashboard', icon: 'mdi-palette', path: '/dashboard' },
-      { text: 'Menu.Article', icon: 'mdi-gentoo', path: '/article' }
+      { text: 'Menu.Article', icon: 'mdi-gentoo', path: '/article' },
+      { text: 'Menu.Markdown', icon: 'mdi-palm-tree', path: '/markdown' },
+      { text: 'Menu.Demo', icon: 'mdi-concourse-ci', path: '/demo' }
     ]
   }),
   computed: {

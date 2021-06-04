@@ -6,6 +6,7 @@ import vuetify from './plugins/vuetify'
 import i18n from './plugins/i18n'
 import './plugins/apexcharts'
 import './plugins/vmdeditor'
+import './plugins/highlight'
 
 Vue.config.productionTip = false
 

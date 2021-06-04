@@ -64,7 +64,7 @@ export default {
       }, 10)
     },
     handleCopyCodeSuccess () {
-      this.showSnackbar({ message: 'Copy Success', color: 'success' })
+      this.showSnackbar({ message: this.$t('Page.Markdown.CopySuccess'), color: 'success' })
     },
     handleAnchorClick (anchor) {
       const { editor } = this.$refs

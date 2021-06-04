@@ -143,10 +143,10 @@
         </v-form>
         <v-card-actions>
           <v-spacer/>
-          <v-btn color="info" text class="text-none" @click="cancelNew()">
+          <v-btn color="info" small text class="text-none" @click="cancelNew()">
             {{$t('Page.Article.Cancel')}}
           </v-btn>
-          <v-btn color="primary" text class="text-none" @click="newArticleApi()">
+          <v-btn color="primary" small text class="text-none" @click="newArticleApi()">
             {{$t('Page.Article.Confirm')}}
           </v-btn>
         </v-card-actions>
@@ -213,10 +213,10 @@
         </v-form>
         <v-card-actions>
           <v-spacer/>
-          <v-btn color="info" text class="text-none" @click="cancelEdit()">
+          <v-btn color="info" text small class="text-none" @click="cancelEdit()">
             {{$t('Page.Article.Cancel')}}
           </v-btn>
-          <v-btn color="primary" text class="text-none" @click="editArticleApi()">
+          <v-btn color="primary" text small class="text-none" @click="editArticleApi()">
             {{$t('Page.Article.Confirm')}}
           </v-btn>
         </v-card-actions>

@@ -6,13 +6,15 @@
     "SignIn": "Sign In",
     "Dashboard": "Dashboard",
     "Article": "Article",
-    "Markdown": "Markdown"
+    "Markdown": "Markdown",
+    "Demo": "Demo"
   },
   "Title": {
     "SignIn": "Sign In",
     "SystemOverview": "System Overview",
     "ArticleManagement": "Article Management",
-    "Markdown": "Markdown"
+    "Markdown": "Markdown",
+    "Demo": "Demo"
   },
   "System": {
     "ConnectTimeout": "Connect timeout",
@@ -66,6 +68,12 @@
       "TitleEnterTip": "Please enter article title",
       "SubtitleEnterTip": "Please enter article subtitle",
       "MarkdownFileSelectTip": "Please select markdown file"
+    },
+    "Markdown": {
+      "CopySuccess": "Copy success"
+    },
+    "Demo": {
+      "CopySuccess": "Copy success"
     }
   }
 }
